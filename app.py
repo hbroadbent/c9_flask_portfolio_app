@@ -19,21 +19,21 @@ def profile(name):
 	return render_template('index.html', name=new_name)
 
 
-@app.route('/add_numbers', methods=['GET','POST'])
-def add_numbers_post():
+@app.route('/word_freq_calc', methods=['GET','POST'])
+def word_freq_calc():
 	  # --> ['5', '6', '8']
 	  # print(type(request.form['text']))
 	  if request.method == 'GET':
-	  	return render_template('add_numbers.html')
+	  	return render_template('word-frequency-calculator.html')
 	  elif request.method == 'POST':
-  	      print(request.form['text'].split())
-  	      total = 0
-  	      try:
-  	      	for str_num in request.form['text'].split():
-  	      		total *= int(str_num)
-  	      	return render_template('add_numbers.html', result=str(total))
-  	      except ValueError:
-  	      	return "Easy now! Let's keep it simple! 2 numbers with a space between them please"
+  	        words = request.form['text'].split(" ")
+  	        word_freqency_counter = {}
+		for word in words:
+		if (word in word_frequency_counter):
+			word_frequency_counter[word] += 1
+		else:
+			word_frequency_counter[word] = 1
+	        return render_template('word-frequency-calculator.html', result=str(word_frequency_counter))
 
 
 @app.route('/shopping_list', methods=['GET','POST'])
